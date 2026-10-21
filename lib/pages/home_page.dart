@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_apps/models/pokemon.dart';
 import 'package:flutter_apps/data/pokemon_data.dart';
+import 'package:flutter_apps/models/pokemon.dart';
 import 'package:flutter_apps/pages/detail_page.dart';
 import 'package:flutter_apps/widgets/pokemon_card.dart';
 import 'package:flutter_apps/widgets/pokemon_list.dart';
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final List<Pokemon> pokemon = dataPokemon;
 
   String _searchQuery = "";
-  bool _showFavoriteOnly = false;
+  final _showFavoriteOnly = false;
   final Set<String> _favoritePokemon = {};
   final TextEditingController _searchController = TextEditingController();
 
@@ -37,9 +37,10 @@ class _HomePageState extends State<HomePage> {
         builder: (_) => DetailPage(pokemon: pokemon, isFavorite: isFavorite),
       ),
     );
+    // ! + =
     if (result != null) {
       setState(() {
-        if(result) {
+        if (result) {
           _favoritePokemon.add(pokemon.name);
         } else {
           _favoritePokemon.remove(pokemon.name);
@@ -48,27 +49,40 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  bool isSwitch = false;
+  bool isSwitch = false; // gak dipake sample aja
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(
+      context,
+    ).size; //mengatahui resolusi layar device
+
+    //filter pokemon berdasarkan kata kunci
+    final filtered = dataPokemon.where((p) {
+      // query => kata kunci yang diinputkan oleh user
+      final q = _searchQuery.toLowerCase();
+      // cek apakah kata kunci ada di nama pokemon
+      final matchesSearch = p.name.toLowerCase().contains(q);
+      // cek apakah pokemon tersebut ada di favorite
+      final matchesFavorite =
+          !_showFavoriteOnly || _favoritePokemon.contains(p.name);
+      // jika kata kunci ada di nama pokemon dan pokemon tersebut ada di favorite
+      return matchesSearch && matchesFavorite;
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Pokemon Go',
+          "Pokémon GO",
           style: TextStyle(
-            fontFamily: 'PokemonSolid',
-            color: Colors.amber[700],
+            fontFamily: "Pokemon",
             fontSize: 32,
+            color: Colors.amber,
           ),
         ),
         centerTitle: true,
-        actions: [
-          Icon(Icons.favorite, color: Colors.red[600]),
-          SizedBox(width: 20),
-        ],
+        actions: [Text('$screenSize')],
+        // Text('$screenSize')
       ),
       body: Column(
         children: [
@@ -78,8 +92,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value;
+                      });
+                    },
                     decoration: InputDecoration(
-                      hintText: 'Search Pokemon',
+                      hintText: "Search Pokemon",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -94,36 +114,50 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
+                //425 Mobile
+                //768 Tablet
+                //1024 Desktop
                 if (constraints.maxWidth <= 425) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
+                      final pokemon = filtered[index];
+                      final isFavorite = _favoritePokemon.contains(
+                        pokemon.name,
+                      );
                       return PokemonList(
-                        pokemon: pokemon[index],
-                        isFavorite: true,
+                        pokemon: pokemon,
+                        isFavorite: isFavorite,
                         onTap: () {
-                          _openDetail(pokemon, true);
+                          _openDetail(pokemon, isFavorite);
                         },
-                        onFavoriteTap: () {},
+                        onFavoriteTap: () {
+                          _toggleFavorite(pokemon.name);
+                        },
                       );
                     },
-                    itemCount: pokemon.length,
+                    itemCount: filtered.length,
                   );
                 } else {
+                  int column = 3;
+                  if (constraints.maxWidth >= 768) column = 4;
+                  if (constraints.maxWidth >= 1024) column = 5;
                   return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
+                      crossAxisCount: column,
+                    ),  
                     itemBuilder: (context, index) {
+                      final pokemon = filtered[index];
+                      final isFavorite = _favoritePokemon.contains(
+                        pokemon.name
+                      );
                       return PokemonCard(
-                        pokemon: pokemon[index],
-                        onTap: () {
-                          _openDetail(pokemon, true);
-                        },
-                        isFavorite: true,
-                        onFavoriteTap: () {},
+                        pokemon: pokemon,
+                        isFavorite: isFavorite,
+                        onTap: () => _openDetail(pokemon, isFavorite),
+                        onFavoriteTap: () => _toggleFavorite(pokemon.name),
                       );
                     },
-                    itemCount: pokemon.length,
+                    itemCount: filtered.length,
                   );
                 }
               },
