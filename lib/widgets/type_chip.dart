@@ -30,7 +30,7 @@ class TypeChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: typeColor(), width: 1),
       ),
-      child: Text(pokemon.type),
+      child: Text(pokemon.type, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600),),
     );
   }
 }

@@ -7,22 +7,16 @@ import 'package:flutter_apps/widgets/type_chip.dart';
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
 
-  const PokemonCard({super.key, required this.pokemon});
+  final bool isFavorite;
+  final VoidCallback onTap;
+  final VoidCallback onFavoriteTap;
+
+  const PokemonCard({super.key, required this.pokemon, required this.onTap, required this.isFavorite, required this.onFavoriteTap});
 
   @override
   Widget build(BuildContext context) {
-    // function intent(pindah/move) ke detail_page
-    void detailPage(Pokemon pokemon) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => DetailPage(pokemon: pokemon)),
-      );
-    }
-
     return InkWell(
-      onTap: () {
-        detailPage(pokemon);
-      },
+      onTap: onTap,
       child: Card(
         elevation: 6,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
