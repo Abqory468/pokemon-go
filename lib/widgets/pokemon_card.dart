@@ -31,6 +31,15 @@ class PokemonCard extends StatelessWidget {
                 width: double.infinity,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(child: Text(pokemon.name)),
+                  TypeChip(pokemon: pokemon, type: pokemon.name)
+                ],
+              ),
+            )
           ],
         ),
       ),

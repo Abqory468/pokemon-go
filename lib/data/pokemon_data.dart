@@ -6,7 +6,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Bulbasaur",
     image: "assets/bulbasaur.jpg",
-    type: "Grass/Poison",
+    type: "Grass",
     description:
     "Sejak lahir, terdapat benih tanaman misterius yang tertanam di punggungnya. Seiring Bulbasaur menyerap sinar matahari dan bertumbuh besar, benih tersebut perlahan berkembang menjadi tunas yang dipenuhi nutrisi alami.\n\nBulbasaur sangat menyukai tempat-tempat hangat yang disinari matahari secara langsung. Ketika merasa terancam atau hendak menyerang, ia dapat memanjangkan sulur-sulur kuat dari dalam tubuhnya untuk mencambuk atau mengikat musuh.",
     basePower: 318,
@@ -66,7 +66,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Dragonite",
     image: "assets/dragonite.jpg",
-    type: "Dragon/Flying",
+    type: "Dragon",
     description:
     "Dikenal sebagai 'Penjaga Lautan' yang sangat pemurah dan bijaksana, Dragonite sering kali membantu menuntun kapal yang karam di tengah badai menuju daratan dengan aman. Wataknya yang lembut membuatnya dicintai oleh para pelaut.\n\nMeskipun memiliki perawakan tubuh yang besar dan terkesan berat, Dragonite sanggup terbang membelah udara dengan kecepatan luar biasa. Ia mampu mengelilingi seluruh permukaan bumi hanya dalam waktu sekitar 16 jam.",
     basePower: 600,
@@ -136,7 +136,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Gengar",
     image: "assets/gengar.jpg",
-    type: "Ghost/Poison",
+    type: "Ghost",
     description:
     "Gemar bersembunyi rapat di dalam bayangan targetnya dan menunggu momen yang tepat untuk melancarkan kejutan. Tanda paling jelas saat Gengar berada dekat denganmu adalah penurunan suhu udara sekitar secara drastis.\n\nKonon, ketika Gengar bersembunyi di dalam bayangan seseorang, ia menyerap panas tubuh korban hingga orang tersebut merasa menggigil kedinginan. Meringai lebar adalah ciri khasnya saat berhasil menakut-nakuti mangsanya.",
     basePower: 500,
@@ -166,7 +166,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Jigglypuff",
     image: "assets/jigglypuff.jpg",
-    type: "Normal/Fairy",
+    type: "Normal",
     description:
     "Mampu membengkakkan tubuhnya yang bulat elastis untuk memuat pasokan udara yang sangat banyak di dalam paru-parunya. Hal ini dilakukannya agar ia bisa menyanyikan melodi merdu dalam durasi yang sangat panjang.\n\nGelombang suara yang dipancarkan saat ia bernyanyi memiliki frekuensi khusus yang sanggup membuat siapa saja yang mendengarnya tertidur seketika. Jika pendengarnya tertidur sebelum lagunya selesai, Jigglypuff kerap merasa kesal dan mengembungkan pipinya.",
     basePower: 270,
@@ -196,7 +196,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Lucario",
     image: "assets/lucario.jpg",
-    type: "Fighting/Steel",
+    type: "Fighting",
     description:
     "Memiliki kemampuan istimewa untuk mendeteksi dan mengendalikan gelombang energi yang dikenal sebagai 'Aura'. Melalui aliran aura ini, Lucario bisa mengetahui kondisi emosi serta niat dari makhluk hidup di sekitarnya.\n\nKemampuan sensorik yang luar biasa ini memungkinkannya untuk memetakan lingkungan sekitar serta melacak keberadaan musuh yang tersembunyi dari jarak lebih dari satu kilometer, bahkan tanpa perlu melihatnya secara langsung.",
     basePower: 525,

@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final List<Pokemon> pokemon = dataPokemon;
 
   String _searchQuery = "";
-  final _showFavoriteOnly = false;
+  bool _showFavoriteOnly = false;
   final Set<String> _favoritePokemon = {};
   final TextEditingController _searchController = TextEditingController();
 
@@ -107,7 +107,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Switch(value: isSwitch, onChanged: (value) {}),
+                Switch(value: _showFavoriteOnly, onChanged: (value) {
+                  setState(() {
+                    _showFavoriteOnly = value;
+                  });
+                }),
               ],
             ),
           ),
@@ -117,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                 //425 Mobile
                 //768 Tablet
                 //1024 Desktop
-                if (constraints.maxWidth <= 425) {
+                if (constraints.maxWidth < 685) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       final pokemon = filtered[index];
@@ -132,18 +136,21 @@ class _HomePageState extends State<HomePage> {
                         },
                         onFavoriteTap: () {
                           _toggleFavorite(pokemon.name);
-                        },
+                        }, type: pokemon.type,
                       );
                     },
                     itemCount: filtered.length,
                   );
                 } else {
                   int column = 3;
-                  if (constraints.maxWidth >= 768) column = 4;
+                  if (constraints.maxWidth >= 504) column = 3;
                   if (constraints.maxWidth >= 1024) column = 5;
                   return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: column,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 3/4
                     ),  
                     itemBuilder: (context, index) {
                       final pokemon = filtered[index];

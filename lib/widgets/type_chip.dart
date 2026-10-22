@@ -27,10 +27,10 @@ class TypeChip extends StatelessWidget {
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: typeColor().withOpacity(0.15),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(15),
         border: Border.all(color: typeColor(), width: 1),
       ),
-      child: Text(pokemon.type, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600),),
+      child: Text(pokemon.type, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 14),),
     );
   }
 }

@@ -5,45 +5,63 @@ import 'package:flutter_apps/widgets/type_chip.dart';
 
 class PokemonList extends StatelessWidget {
   final Pokemon pokemon;
+  final String type;
+
   final bool isFavorite;
   final VoidCallback onTap;
   final VoidCallback onFavoriteTap;
 
-  const PokemonList({super.key, required this.pokemon, required this.isFavorite, required this.onTap, required this.onFavoriteTap});
+  const PokemonList({
+    super.key,
+    required this.pokemon,
+    required this.isFavorite,
+    required this.onTap,
+    required this.onFavoriteTap, required this.type,
+  });
+
+  Color typeColor() {
+    if (type.contains('Water')) {return Colors.blue;}
+    if (type.contains('Poison')) {return Colors.purple;}
+    if (type.contains('Grass')) {return Colors.green;}
+    if (type.contains('Electric')) {return Colors.amber;}
+    if (type.contains('Dragon')) {return Colors.indigo;}
+    if (type.contains('Fire')) {return Colors.red;}
+    if (type.contains('Ice')) {return Colors.teal;}
+    if (type.contains('Ghost')) {return Colors.black12;}
+    if (type.contains('Fairy')) {return Colors.pink;}
+    if (type.contains('Normal')) {return Colors.grey;}
+    if (type.contains('Fighting')) {return Colors.orange;}
+    return Colors.amber;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: Hero(
-                tag: pokemon.name,
-                child: Image.asset(
-                  pokemon.image,
-                  width: 56,
-                  height: 56,
-                  fit: BoxFit.cover,
-                ),
-              ),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),
+      side: BorderSide(
+          color: typeColor(),
+          width: 2)
+      ),
+      child: ListTile(
+        onTap: onTap,
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Hero(
+            tag: pokemon.name,
+            child: Image.asset(
+              pokemon.image,
+              width: 67,
+              height: 67,
+              fit: BoxFit.cover,
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(pokemon.name)
-                  ],
-                ),
-              ),
-            ),
-            Icon(Icons.favorite_outline_rounded)
-          ],
+          ),
         ),
+        title: Text(pokemon.name, style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold, fontSize: 14),),
+        subtitle: TypeChip(pokemon: pokemon, type: pokemon.type),
+        trailing: IconButton(onPressed: onFavoriteTap, icon: isFavorite? Icon(Icons.favorite,color: Colors.red[600],) : Icon(Icons.favorite_border),)
+      //   if(){}else{}
+      //   kondisi ? : true : false
       ),
     );
   }
