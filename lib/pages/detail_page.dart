@@ -7,7 +7,11 @@ class DetailPage extends StatefulWidget {
   final Pokemon pokemon;
   final bool isFavorite;
 
-  const DetailPage({super.key, required this.pokemon, required this.isFavorite});
+  const DetailPage({
+    super.key,
+    required this.pokemon,
+    required this.isFavorite,
+  });
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -27,7 +31,13 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
         centerTitle: false,
-        actions: [Icon(Icons.favorite_outline_rounded)],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.favorite, color: Colors.red[600]),
+          ),
+          SizedBox(width: 12),
+        ],
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -41,7 +51,10 @@ class _DetailPageState extends State<DetailPage> {
                       tag: widget.pokemon.name,
                       child: ClipRRect(
                         borderRadius: BorderRadiusGeometry.circular(40),
-                        child: Image.asset(widget.pokemon.image, fit: BoxFit.cover),
+                        child: Image.asset(
+                          widget.pokemon.image,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -66,7 +79,10 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                           SizedBox(height: 15),
-                          TypeChip(pokemon: widget.pokemon, type: widget.pokemon.type),
+                          TypeChip(
+                            pokemon: widget.pokemon,
+                            type: widget.pokemon.type,
+                          ),
                           SizedBox(height: 15),
                           Text(
                             'Base Power: ${widget.pokemon.basePower}',
@@ -203,7 +219,10 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         SizedBox(height: 15),
-                        TypeChip(pokemon: widget.pokemon, type: widget.pokemon.type),
+                        TypeChip(
+                          pokemon: widget.pokemon,
+                          type: widget.pokemon.type,
+                        ),
                         SizedBox(height: 15),
                         Text(
                           'Base Power: ${widget.pokemon.basePower}',

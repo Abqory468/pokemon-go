@@ -96,7 +96,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Eevee",
     image: "assets/eevee.jpg",
-    type: "Normal",
+    type: "Fairy",
     description:
     "Memiliki struktur genetik yang sangat tidak stabil dan unik di dunia Pokémon. Karakteristik khusus ini membuatnya sangat peka terhadap perubahan lingkungan serta elemen-elemen eksternal di sekitarnya.\n\nKarena keunikan DNA tersebut, Eevee dapat berevolusi menjadi berbagai wujud elemen yang berbeda-beda—seperti api, air, listrik, hingga bayangan—tergantung pada batu evolusi atau tingkat ikatan emosional dengan pelatihnya.",
     basePower: 325,
@@ -256,7 +256,7 @@ final List<Pokemon> dataPokemon = [
   Pokemon(
     name: "Snorlax",
     image: "assets/snorlax.jpg",
-    type: "Normal",
+    type: "Ice",
     description:
     "Menghabiskan sebagian besar waktunya sehari-hari hanya untuk makan dan tidur. Pokémon ini tidak akan merasa puas sebelum menyantap setidaknya 400 kg makanan setiap harinya hingga perutnya membesar.\n\nCairan asam di dalam lambungnya sangat pekat dan mematikan, memungkinkannya mencerna makanan basi, berjamur, hingga bahan beracun tanpa mengalami gangguan pencernaan sedikit pun.",
     basePower: 540,

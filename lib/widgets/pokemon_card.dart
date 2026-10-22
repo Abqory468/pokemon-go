@@ -11,7 +11,13 @@ class PokemonCard extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback onFavoriteTap;
 
-  const PokemonCard({super.key, required this.pokemon, required this.onTap, required this.isFavorite, required this.onFavoriteTap});
+  const PokemonCard({
+    super.key,
+    required this.pokemon,
+    required this.onTap,
+    required this.isFavorite,
+    required this.onFavoriteTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +29,40 @@ class PokemonCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
-            Hero(
-              tag: pokemon.name,
-              child: Image.asset(
-                pokemon.image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+            Stack(
+              children: [
+                Hero(
+                  tag: pokemon.name,
+                  child: Image.asset(
+                    pokemon.image,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.transparent,
+                    onPressed: () {},
+                    child: IconButton(
+                      onPressed: onFavoriteTap,
+                      icon: isFavorite
+                          ? Icon(Icons.favorite, color: Colors.red[600])
+                          : Icon(Icons.favorite, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   Expanded(child: Text(pokemon.name)),
-                  TypeChip(pokemon: pokemon, type: pokemon.name)
+                  TypeChip(pokemon: pokemon, type: pokemon.type),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
